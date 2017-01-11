@@ -1,0 +1,15 @@
+{
+    "files": [
+        "src/**",
+        "!src/external/*",
+        "!src/common/css/extern.less"
+    ],
+    "htmlcs": {
+        "viewport": false,
+        "img-alt": false,
+        "img-width-height": false
+    },
+    "htmlhint": {
+        "style-disabled": false
+    }
+}
