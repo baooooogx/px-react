@@ -31,6 +31,41 @@ npm run watch
 http://localhost:8889/index/index.html
 ```
 
+## 访问方式
+
+### 分别启动server端和client端
+```bash
+# 首先执行node app.js 启动node数据接口
+node app.js
+# 然后npm run watch 监听前端文件变化并且启动本地服务
+npm run watch
+```
+
+### 同时启动server端和client端
+```bash
+# 改写app.js 加入webpack热启动代码，直接node app.js启动
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
+const webpackDevConfig = require('./build/webpack.dev');
+
+new WebpackDevServer(webpack(webpackDevConfig), {
+    publicPath: webpackDevConfig.output.publicPath,
+    hot: true,
+    inline: true,
+    compress: true,
+    colors: true,
+    contentBase: './dist',
+    proxy: {
+        '/data/*': {
+            target: 'http://127.0.0.1:3000/',
+            secure: false,
+            host: '127.0.0.1:3000',
+            changeOrigin: true
+        }
+    }
+}).listen(8889);
+```
+
 ## lint
 
 ### commit前执行pre-commit
