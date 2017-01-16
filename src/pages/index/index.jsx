@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import ReactDom from 'react-dom';
 import {createStore, bindActionCreators} from 'redux';
 import {Provider, connect} from 'react-redux';
-import store from '../../app/stores/store';
+import {changeText, buttonClick} from '../../app/actions/action';
 
 import './index.less';
 
@@ -75,4 +75,10 @@ function mapStateToProperties(state) {
   return { text: state.text };
 }
 
-export default connect(mapStateToProperties)(Index);
+function mapDispatchToProps(dispatch){
+    return{
+        actions : bindActionCreators({changeText: changeText, buttonClick: buttonClick}, dispatch)
+    }
+}
+
+export default connect(mapStateToProperties, mapDispatchToProps)(Index);

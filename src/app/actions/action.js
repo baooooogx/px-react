@@ -1,10 +1,10 @@
-export const nav = 'NAV_ITEM';
-export const BUTTON_CLICK = 'BUTTON_CLICK';
-export const CHANGE_TEXT = 'CHANGE_TEXT';
+const NAV = 'NAV_ITEM';
+const BUTTON_CLICK = 'BUTTON_CLICK';
+const CHANGE_TEXT = 'CHANGE_TEXT';
 
 export function nav(text) {
     return {
-        type: nav,
+        type: NAV,
         text
     }
 }
@@ -17,7 +17,7 @@ export function changeText() {
 
 export function buttonClick() {
     return {
-        type: BUTTON_CLICK;
+        type: BUTTON_CLICK
     }
 }
 
