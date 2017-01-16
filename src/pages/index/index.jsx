@@ -1,12 +1,53 @@
 import React, {PureComponent} from 'react';
 import ReactDom from 'react-dom';
+import {createStore, bindActionCreators} from 'redux';
+import {Provider, connect} from 'react-redux';
+import store from '../../app/stores/store';
+
 import './index.less';
+
+class Change extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.props.actions.buttonClick();
+    }
+
+    render() {
+        return (
+            <button onClick={this.handleClick}>change</button>
+        );
+    }
+}
+
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick() {
+        this.props.actions.changeText();
+    }
+
+    render() {
+        return (
+            <h1 onClick={this.handleClick}> {this.props.text} </h1>
+        );
+    }
+}
 
 class Index extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {};
+
     }
 
     componentWillMount() {
@@ -18,8 +59,11 @@ class Index extends React.Component {
     }
 
     render() {
+        const {actions, text} = this.props;
         return (
             <div>
+                <App actions={actions} text={text}/>
+                <Change actions={actions}/>
                 <div>name: {this.state.name}!</div>
                 <p>sex: {this.state.sex}!</p>
             </div>
@@ -27,7 +71,8 @@ class Index extends React.Component {
     }
 }
 
-ReactDom.render(
-    <Index />,
-    document.getElementById('px-main')
-);
+function mapStateToProperties(state) {
+  return { text: state.text };
+}
+
+export default connect(mapStateToProperties)(Index);

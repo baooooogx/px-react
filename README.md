@@ -4,6 +4,7 @@
 ```bash
 /build   # webpack编译配置
 /dist   # 存放最终发布的代码
+/server  # node端提供数据/接口转发/数据处理
 /src    # 项目前端源码
 /mockup  # 存放模拟数据
 /tool  # fecs代码检查

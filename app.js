@@ -10,7 +10,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'src')));
 
-app.use(require('./server/routes'));
+// 设置跨域访问，方便开发
+app.all('*', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+
+app.use(require('./server/api'));
 
 app.listen('3000', (error) => {
     if (error) console.log(error);

@@ -56,9 +56,9 @@ const config =  {
               loader: ExtractTextPlugin.extract('style', 'css?minimize!postcss!resolve-url!less?sourceMap')
             },
             {
-              test: /\.jsx$/,
+              test: /\.jsx|\.js$/,
               exclude: /node_modules/,
-              loader: 'babel'
+              loader: 'babel?presets[]=es2015&presets[]=react'
             }
         ]
     },
