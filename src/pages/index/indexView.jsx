@@ -76,7 +76,7 @@ function mapStateToProperties(state) {
 }
 
 function mapDispatchToProps(dispatch){
-    return {
+    return{
         actions : bindActionCreators({changeText: changeText, buttonClick: buttonClick}, dispatch)
     }
 }

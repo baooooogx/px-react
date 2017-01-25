@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import ReactDom from 'react-dom';
 import {createStore, bindActionCreators} from 'redux';
 import {Provider, connect} from 'react-redux';
-import {changeText, buttonClick} from '../../app/actions/action';
+import {changeText, buttonClick, getData} from '../../actions/action';
 
 import './index.less';
 
@@ -50,12 +50,17 @@ class Index extends React.Component {
 
     }
 
+    // componentWillMount() {
+    //     fetch('/data/test').then((res) => {
+    //         return res.json();
+    //     }).then((data) => {
+    //         this.setState(data);
+    //     });
+    // }
     componentWillMount() {
-        fetch('/data/index').then((res) => {
-            return res.json();
-        }).then((data) => {
-            this.setState(data);
-        });
+        console.log('willmount')
+        console.log(this.props.actions.getData())
+        // this.props.dispatch(this.props.actions.getData());
     }
 
     render() {
@@ -76,8 +81,8 @@ function mapStateToProperties(state) {
 }
 
 function mapDispatchToProps(dispatch){
-    return {
-        actions : bindActionCreators({changeText: changeText, buttonClick: buttonClick}, dispatch)
+    return{
+        actions : bindActionCreators({changeText: changeText, buttonClick: buttonClick, getData: getData}, dispatch)
     }
 }
 

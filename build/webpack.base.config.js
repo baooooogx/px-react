@@ -18,12 +18,12 @@ const projectRoot = path.resolve(__dirname, '../');
 const DEBUG = process.env.NODE_ENV === 'development';
 
 const srcDir = path.join(projectRoot, 'src');
-const pageWrapDir = path.resolve(srcDir, 'pages');
+const pageWrapDir = path.resolve(srcDir, 'modules');
 
 const config =  {
     context: srcDir,
 
-    entry: {},
+    entry: {index: '../index'},
 
     output: {
         path: path.join(projectRoot, 'dist'),
@@ -74,42 +74,61 @@ const config =  {
           $: 'jquery',
           jQuery: 'jquery',
           'window.jQuery': 'jquery'
-      })
+      }),
+      new HtmlWebpackPlugin({title: 'test', template: '../index.html'})
     ]
 };
 
 
 // add page entry
-const pages = fs.readdirSync(pageWrapDir);
-const tplPath = path.resolve(projectRoot, 'index.html');
-const pageChunks = [];
+// const pages = fs.readdirSync(pageWrapDir);
+// const tplPath = path.resolve(projectRoot, 'index.html');
+// const pageChunks = [];
 
-pages.forEach(function (page, index) {
-  const curPageDir = path.resolve(pageWrapDir, page);
-  const stat = fs.statSync(curPageDir);
+// pages.forEach(function (page, index) {
+//   const curPageDir = path.resolve(pageWrapDir, page);
+//   const stat = fs.statSync(curPageDir);
 
-  if (stat.isDirectory()) {
-    const indexPath = path.resolve(curPageDir, `${page}.jsx`);
-    const indexStat = fs.statSync(indexPath);
+//   if (stat.isDirectory()) {
+//     const indexPath = path.resolve(curPageDir, `${page}.jsx`);
+//     const indexStat = fs.statSync(indexPath);
 
-    // add entry
-    if (indexStat.isFile()) {
-      config.entry[page] = path.relative(config.context, indexPath);
-    }
+//     // add entry
+//     if (indexStat.isFile()) {
+//       config.entry[page] = path.relative(config.context, indexPath);
+//     }
 
-    pageChunks.push(page);
+//     pageChunks.push(page);
 
-    // add page
-    config.plugins.push(
-      new HtmlWebpackPlugin({
-        template: tplPath,
-        filename: page + `/${page}.html`,
-        inject: true,
-        page: page,
-        chunks: [page]
-      })
-    );
-  }
-});
+//     // add page
+//     config.plugins.push(
+//       new HtmlWebpackPlugin({
+//         template: tplPath,
+//         filename: page + `/${page}.html`,
+//         inject: true,
+//         page: page,
+//         chunks: [page]
+//       })
+//     );
+//   }
+
+//   else if (stat.isFile()) {
+//     const filename = path.basename(page, '.jsx');
+//     const mainPath = path.resolve(pageWrapDir, `${filename}.jsx`);
+
+//     config.entry[filename] = path.relative(config.context, mainPath);
+
+//     // add filename
+//     config.plugins.push(
+//       new HtmlWebpackPlugin({
+//         template: tplPath,
+//         filename: `${filename}.html`,
+//         inject: true,
+//         page: filename,
+//         chunks: [filename]
+//       })
+//     );
+//   }
+// });
 
 module.exports = config;

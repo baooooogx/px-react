@@ -22,6 +22,7 @@ module.exports = Object.assign({}, webpackConfig, {
       port: 8889,
       hot: true,
       inline: true,
+      historyApiFallback: true,
       proxy: {
         '/data/*': {
           target: 'http://127.0.0.1:3000/',

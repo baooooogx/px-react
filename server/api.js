@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-router.get('/data/index', (req, res) => {
+router.post('/data/test', (req, res) => {
     res.send({name: 'bao', sex: 'female'});
 });
 

@@ -13,6 +13,13 @@ export default function app(state = initialState, action) {
         return {
             text: 'you just click button'
         }
+    case 'GET_DATA':
+      console.log('get-data')
+      console.log(action.data)
+        return {
+          text: 'get data success',
+          data: action.data
+        }
     default:
       return state;
   }

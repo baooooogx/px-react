@@ -1,8 +1,11 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
+const Router = require('react-router');
 
 const app = express();
+
+const api = require('./server/api');
 
 // set views
 app.set('port', process.env.PORT || 3000);
@@ -16,7 +19,7 @@ app.all('*', (req, res, next) => {
     next();
 });
 
-app.use(require('./server/api'));
+app.use(api);
 
 app.listen('3000', (error) => {
     if (error) console.log(error);
