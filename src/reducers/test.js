@@ -2,7 +2,7 @@ const initialState = {
   text: 'Hello'
 };
 
-export default function app(state = initialState, action) {
+export default function test(state = initialState, action) {
   switch (action.type) {
     case 'APP_LOAD':
       return { ...state, loaded: true }

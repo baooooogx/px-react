@@ -1,21 +1,21 @@
-import {createStore, applyMiddleware, combineReducers, compose} from 'redux';
-import {routerReducer} from 'react-router-redux';
+import {createStore, applyMiddleware} from 'redux';
 import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
-import app from '../reducers/app';
+import reducer from '../reducers';
+import {getData} from '../actions/action';
 
 const logger = createLogger({
     predicate: (getState, action) => action.type !== 'FETCHING'
 });
 
-const reducer = combineReducers({
-    ...app,
-    routing: routerReducer
-});
-
 let store = createStore(
     reducer,
     applyMiddleware(thunk, logger)
-)
+);
+
+// store.dispatch(getData()).then(() => {
+//     console.log()
+//     console.log(store.getState())
+// })
 
 export default store;

@@ -10,9 +10,21 @@ import {syncHistoryWithStore, routerReducer} from 'react-router-redux';
 const history = syncHistoryWithStore(browserHistory, store);
 
 // Provider写在一行，就报错：react Element need only one child
+// ReactDom.render(
+//     <Provider store={store}>
+//         <Index />
+//     </Provider>,
+//     document.getElementById('px-main')
+// );
+
+
 ReactDom.render(
     <Provider store={store}>
-        <Index />
+        <Router history={history}>
+            <Route path='/' component={Index}>
+                <Route path='/index' component={Index} />
+            </Route>
+        </Router>
     </Provider>,
     document.getElementById('px-main')
 );

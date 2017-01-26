@@ -19,7 +19,7 @@ app.all('*', (req, res, next) => {
     next();
 });
 
-app.use(api);
+app.use('/data', api);
 
 app.listen('3000', (error) => {
     if (error) console.log(error);

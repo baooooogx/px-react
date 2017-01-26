@@ -6,8 +6,6 @@ const CHANGE_TEXT = 'CHANGE_TEXT';
 const GET_DATA = 'GET_DATA';
 
 const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || 'http://localhost:8889' : '';
-console.log('baseurl')
-console.log(baseURL)
 
 function receivePosts(subreddit, json) {
   return {
@@ -52,6 +50,4 @@ export function getData() {
             }))
     }
 }
-
-
 

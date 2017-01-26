@@ -1,7 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, PropTypes} from 'react';
 import ReactDom from 'react-dom';
-import {createStore, bindActionCreators} from 'redux';
-import {Provider, connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import {changeText, buttonClick, getData} from '../../actions/action';
 
 import './index.less';
@@ -45,22 +45,14 @@ class App extends React.Component {
 class Index extends React.Component {
     constructor(props) {
         super(props);
-
-        this.state = {};
-
     }
 
-    // componentWillMount() {
-    //     fetch('/data/test').then((res) => {
-    //         return res.json();
-    //     }).then((data) => {
-    //         this.setState(data);
-    //     });
-    // }
     componentWillMount() {
-        console.log('willmount')
-        console.log(this.props.actions.getData())
-        // this.props.dispatch(this.props.actions.getData());
+        const fetchJson = this.props.actions.getData();
+
+        fetchJson.then(function (res) {
+            this.setState({data: res.data});
+        }.bind(this));
     }
 
     render() {
@@ -69,20 +61,20 @@ class Index extends React.Component {
             <div>
                 <App actions={actions} text={text}/>
                 <Change actions={actions}/>
-                <div>name: {this.state.name}!</div>
-                <p>sex: {this.state.sex}!</p>
+                <div>name: {this.state}!</div>
+                <p>sex: {this.state}!</p>
             </div>
         );
     }
 }
 
 function mapStateToProperties(state) {
-  return { text: state.text };
+  return { text: state.app.text };
 }
 
 function mapDispatchToProps(dispatch){
-    return{
-        actions : bindActionCreators({changeText: changeText, buttonClick: buttonClick, getData: getData}, dispatch)
+    return {
+        actions : bindActionCreators({changeText, buttonClick, getData}, dispatch)
     }
 }
 
