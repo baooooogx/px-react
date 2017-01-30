@@ -1,4 +1,4 @@
-import React, {PureComponent, PropTypes} from 'react';
+import React from 'react';
 import ReactDom from 'react-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';

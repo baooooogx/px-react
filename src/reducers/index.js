@@ -22,16 +22,9 @@ export const changeText = (state = initialState, action) => {
       return {
           text: state.text == 'Hello' ? 'hello' : '啊'
       }
-    default: 
-      return state;
-  }
-}
-
-export const buttonClick = (state = initialState, action) => {
-  switch (action.type) {
-    case 'BUTTON_CLICK':
+    case 'BUTTON_CLICK': 
       return {
-          text: 'you just click button'
+      	text: 'you just click button'
       }
     default: 
       return state;
