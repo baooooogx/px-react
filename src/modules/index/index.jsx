@@ -49,13 +49,7 @@ class Index extends React.Component {
         super(props);
     }
 
-    componentDidMount() {
-        const {dispatch, getData} = this.props;
-
-        dispatch(getData());
-    }
-
-    componentDidMount() {
+    componentWillMount() {
         const fetchJson = this.props.actions.getData();
 
         fetchJson.then(function (res) {
@@ -77,7 +71,10 @@ class Index extends React.Component {
 }
 
 function mapStateToProperties(state) {
-  return { text: state.changeText.text, data: state.getData.data };
+    return { 
+        text: state.changeText.text, 
+        data: state.getData.data 
+    };
 }
 
 function mapDispatchToProps(dispatch){
