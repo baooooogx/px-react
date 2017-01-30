@@ -7,22 +7,6 @@ const GET_DATA = 'GET_DATA';
 
 const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || 'http://localhost:8889' : '';
 
-function receivePosts(subreddit, json) {
-  return {
-    type: 'RECEIVE_POSTS',
-    subreddit,
-    posts: json.data.children.map(child => child.data),
-    receivedAt: Date.now()
-  }
-}
-
-export function nav(text) {
-    return {
-        type: NAV,
-        text
-    }
-}
-
 export function changeText() {
     return {
         type: CHANGE_TEXT

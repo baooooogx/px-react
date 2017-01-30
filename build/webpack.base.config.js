@@ -27,7 +27,7 @@ const config =  {
 
     output: {
         path: path.join(projectRoot, 'dist'),
-        publicPath: DEBUG ? '/' : '../',
+        publicPath: DEBUG ? '/' : './',
         filename: 'js/[name].js'
     },
 
