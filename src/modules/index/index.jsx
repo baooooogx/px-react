@@ -2,7 +2,9 @@ import React, {PureComponent, PropTypes} from 'react';
 import ReactDom from 'react-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+
 import {changeText, buttonClick, getData} from '../../actions/action';
+import Table from '../../components/table';
 
 import './index.less';
 
@@ -47,29 +49,35 @@ class Index extends React.Component {
         super(props);
     }
 
-    componentWillMount() {
+    componentDidMount() {
+        const {dispatch, getData} = this.props;
+
+        dispatch(getData());
+    }
+
+    componentDidMount() {
         const fetchJson = this.props.actions.getData();
 
         fetchJson.then(function (res) {
-            this.setState({data: res.data});
+            this.setState(res.data);
         }.bind(this));
     }
 
     render() {
-        const {actions, text} = this.props;
+        const {actions, text, data} = this.props;
+
         return (
             <div>
                 <App actions={actions} text={text}/>
                 <Change actions={actions}/>
-                <div>name: {this.state}!</div>
-                <p>sex: {this.state}!</p>
+                <Table data={data} />
             </div>
         );
     }
 }
 
 function mapStateToProperties(state) {
-  return { text: state.app.text };
+  return { text: state.changeText.text, data: state.getData.data };
 }
 
 function mapDispatchToProps(dispatch){
