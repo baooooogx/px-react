@@ -19,10 +19,12 @@ export function buttonClick() {
     }
 }
 
-export function getData() {
+export function getData(data) {
+    console.log(data)
     return (dispatch) => {
         return fetch('/data/test', {
                 method: 'post',
+                body: JSON.stringify(data),
                 headers: new Headers({
                     'Content-Type': 'application/json'
                 })

@@ -13,18 +13,18 @@
 
 
 const initialState = {
-  text: 'Hello'
+  	value: 0
 };
 
 export const changeText = (state = initialState, action) => {
   switch (action.type) {
     case 'CHANGE_TEXT':
       return {
-          text: state.text == 'Hello' ? 'hello' : '啊'
+          value: state.value
       }
     case 'BUTTON_CLICK': 
       return {
-      	text: 'you just click button'
+      	value: '1'
       }
     default: 
       return state;
