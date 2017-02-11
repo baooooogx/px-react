@@ -4,7 +4,7 @@ import createLogger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import * as reducers from '../reducers';
-import {getData} from '../actions/action';
+// import {getData} from '../actions/action';
 
 const rootReducer = combineReducers({
     ...reducers,

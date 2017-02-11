@@ -34,7 +34,7 @@ const config =  {
     resolve: {
         root: [srcDir],
 
-        extensions: ['', '.js', '.jsx']
+        extensions: ['', '.js', '.jsx', 'json']
     },
 
     postcss: [autoprefixer],

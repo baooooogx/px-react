@@ -4,6 +4,7 @@ const NAV = 'NAV_ITEM';
 const BUTTON_CLICK = 'BUTTON_CLICK';
 const CHANGE_TEXT = 'CHANGE_TEXT';
 const GET_DATA = 'GET_DATA';
+const CHANGE_OPTION = 'CHANGE_OPTION';
 
 const baseURL = typeof window === 'undefined' ? process.env.BASE_URL || 'http://localhost:8889' : '';
 
@@ -19,8 +20,13 @@ export function buttonClick() {
     }
 }
 
+export function changeOption() {
+    return {
+        type: CHANGE_OPTION
+    }
+}
+
 export function getData(data) {
-    console.log(data)
     return (dispatch) => {
         return fetch('/data/test', {
                 method: 'post',

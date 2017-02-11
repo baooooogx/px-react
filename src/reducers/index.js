@@ -22,13 +22,24 @@ export const changeText = (state = initialState, action) => {
       return {
           value: state.value
       }
-    case 'BUTTON_CLICK': 
+    case 'BUTTON_CLICK':
       return {
       	value: '1'
       }
-    default: 
+    default:
       return state;
   }
+}
+
+export const changeOption = (state = initialState, action) => {
+    switch (action.type) {
+      case 'CHANGE_OPTION':
+        return {
+            value: state.value
+        }
+      default:
+        return state;
+    }
 }
 
 export const getData = (state = initialState, action) => {
@@ -38,7 +49,7 @@ export const getData = (state = initialState, action) => {
           text: 'get data success',
           data: action.data
       }
-    default: 
+    default:
       return state;
   }
 }
