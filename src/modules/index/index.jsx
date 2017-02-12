@@ -2,8 +2,10 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {changeText, buttonClick, getData, changeOption} from '../../actions/action';
+import {changeText, buttonClick, getData} from '../../actions/action';
 import Table from '../../components/table';
+
+import myChart from '../../components/echarts';
 
 import './index.less';
 
@@ -18,8 +20,6 @@ class Index extends React.Component {
 
     changeOption(e) {
         this.setState({value: e.target.value});
-
-        this.props.actions.changeOption();
     }
 
     fetchJson(value) {
@@ -38,6 +38,8 @@ class Index extends React.Component {
         if (prevState.value !== this.state.value) {
             this.fetchJson(this.state.value);
         }
+
+        myChart();
     }
 
     render() {
@@ -50,8 +52,8 @@ class Index extends React.Component {
                     <option value='1'>筛选项2</option>
                     <option value='2'>筛选项3</option>
                 </select>
-                <div>{this.state.value}</div>
                 <Table data={data} />
+                <div id="echarts">{this.state.value}</div>
             </div>
         );
     }
@@ -59,14 +61,13 @@ class Index extends React.Component {
 
 function mapStateToProperties(state) {
     return {
-        value: state.changeOption.value,
         data: state.getData.data
     };
 }
 
 function mapDispatchToProps(dispatch){
     return {
-        actions : bindActionCreators({getData, changeText, changeOption}, dispatch)
+        actions : bindActionCreators({getData, changeText}, dispatch)
     }
 }
 
